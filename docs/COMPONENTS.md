@@ -7,18 +7,18 @@ A4 講義和 16:9 簡報共用同一組元件，寫法一樣，字級和間距�
 - A4 連 `templates/doc.css`，簡報連 `templates/deck.css`。兩份都會自動載入 `tokens.css`（顏色、字體、字級）和 `components.css`（這頁的元件）。
 - 頭像、舉牌、GAL 背景這些圖的路徑寫在 CSS 裡，所以 HTML 要連 repo 裡的 `templates/`，不要把 CSS 單獨複製出去。
 - 想讓每台機器輸出的 PDF 都一樣，先跑一次 `python3 tools/fetch_fonts.py`（見 README 的「字體與字級」）。
-- 這頁的圖是 `python3 tools/shots.py` 從兩份總覽截出來的，總覽改了就重跑。
+- 這頁的圖是 `python3 tools/shots.py` 從兩份總覽截出來的，總覽改了就重跑。`docs/preview/c/` 裡會有全部元件的截圖（A4 和簡報各一套），下面只挑主要的放；沒放上來的直接翻 [A4 元件總覽](../examples/components.pdf) 或 [簡報元件總覽](../examples/components-deck.pdf)。
 
 ## 一覽
 
-- **角色**　[講解框](#講解框) · [對話](#對話) · [貼圖](#貼圖) · [印章](#印章) · [舉牌](#舉牌) · [GAL 對話頁](#gal-對話頁)
+- **角色**　[講解框](#講解框) · [對話](#對話) · [貼圖](#貼圖) · [旁白](#旁白) · [印章](#印章) · [舉牌](#舉牌) · [GAL 對話頁](#gal-對話頁)
 - **重點與比較**　[例子框](#例子框) · [重點框](#重點框) · [標籤框](#標籤框) · [對錯對照](#對錯對照) · [公式](#公式) · [大數字](#大數字) · [卡片](#卡片) · [兩欄對照](#兩欄對照) · [表格](#表格)
 - **流程與結構**　[步驟](#步驟) · [時間軸](#時間軸) · [檢核清單](#檢核清單) · [目錄](#目錄) · [連載進度](#連載進度)
 - **行內**　[行內程式碼](#行內程式碼) · [標籤與難度](#標籤與難度) · [日文讀音](#日文讀音)
 - **教材**　[練習題](#練習題) · [選擇題](#選擇題) · [姓名欄](#姓名欄) · [術語表](#術語表) · [對照翻譯](#對照翻譯) · [參考資料](#參考資料) · [分欄](#分欄)
 - **樂理**　[音級](#音級) · [鍵盤圖](#鍵盤圖) · [和弦進行](#和弦進行) · [節奏格](#節奏格) · [五度圈](#五度圈)
 - **裝飾**　[波浪線](#波浪線) · [泡泡](#泡泡) · [浮水印](#浮水印) · [深海](#深海)
-- **頁型**　[A4 頁型](#a4-頁型) · [簡報頁型](#簡報頁型)
+- **頁型**　[紙本頁型](#紙本頁型) · [簡報頁型](#簡報頁型)
 
 ## 角色
 
@@ -31,7 +31,7 @@ A4 講義和 16:9 簡報共用同一組元件，寫法一樣，字級和間距�
 ```html
 <div class="whale tip">
   <span class="av"></span>
-  <div class="txt"><span class="who"></span>記法：多利安＝小調把第六音升上去。</div>
+  <div class="txt"><span class="who"></span>記法：多利安＝小調把第六音升上去喵。</div>
 </div>
 ```
 
@@ -61,7 +61,7 @@ A4 講義和 16:9 簡報共用同一組元件，寫法一樣，字級和間距�
 
 一張圓臉配一句短話，像聊天軟體的貼圖。
 
-<img src="preview/c/sticker.webp" width="427" alt="貼圖">
+<img src="preview/c/sticker.webp" width="430" alt="貼圖">
 
 ```html
 <span class="sticker warn">不准寫 b！</span>
@@ -70,11 +70,26 @@ A4 講義和 16:9 簡報共用同一組元件，寫法一樣，字級和間距�
 - 表情跟講解框一樣用 class 換。一排好幾張時會自動左右交錯傾斜。
 - 加 `.pin` 貼到這一頁的右上角；臉的大小用 `--s` 調，例如 `style="--s: 8em"`。
 
+### 旁白
+
+一句感想配一張小臉，放在它評論的那段內容後面。簡報每一頁都可以放一個，讀起來像有人坐在旁邊跟著講，而不是只有投影片。
+
+<img src="preview/c/aside.webp" width="282" alt="旁白">
+
+```html
+<p class="aside tip">白鍵從 D 開始數，就是多利安。</p>
+<p class="aside review"></p>          <!-- 留空就只放表情 -->
+```
+
+- 種類跟講解框一樣：不加是講解，`tip` 訣竅、`warn` 警告、`mix` 易混、`fact` 冷知識、`review` 複習。
+- 臉的大小跟著 `--av`（A4 34px、簡報 56px），要換別張圖就自己放 `<img>`。
+- 它會跟著內容排；放進 `.body` 的結尾就會貼著那段內容，放在 section 直屬子元素會被推到頁尾。
+
 ### 印章
 
 斜斜蓋在標題旁邊或角落。
 
-<img src="preview/c/stamp.webp" width="465" alt="印章">
+<img src="preview/c/stamp.webp" width="468" alt="印章">
 
 ```html
 <h2>多利安 <span class="stamp">必考</span></h2>
@@ -118,7 +133,7 @@ A4 講義和 16:9 簡報共用同一組元件，寫法一樣，字級和間距�
 
 譜例、指令、引文這些「不是正文」的東西。沒有頭像，一頁可以有好幾個。
 
-<img src="preview/c/ex.webp" width="579" alt="例子框">
+<img src="preview/c/ex.webp" width="583" alt="例子框">
 
 ```html
 <div class="ex">例：C 多利安 ← 從 B♭ 大調的第二音開始。</div>
@@ -171,7 +186,7 @@ A4 講義和 16:9 簡報共用同一組元件，寫法一樣，字級和間距�
 
 「A ＋ B ＝ C」的記法。
 
-<img src="preview/c/formula.webp" width="396" alt="公式">
+<img src="preview/c/formula.webp" width="398" alt="公式">
 
 ```html
 <div class="formula">
@@ -252,9 +267,9 @@ A4 講義和 16:9 簡報共用同一組元件，寫法一樣，字級和間距�
 
 有先後順序的幾步：圓圈編號自動產生，中間用線連起來。
 
-<img src="preview/c/steps.webp" width="671" alt="步驟">
+<img src="preview/c/steps.webp" width="673" alt="步驟">
 
-<img src="preview/c/steps-down.webp" width="385" alt="直排步驟">
+<img src="preview/c/steps-down.webp" width="388" alt="直排步驟">
 
 ```html
 <ol class="steps">
@@ -270,7 +285,7 @@ A4 講義和 16:9 簡報共用同一組元件，寫法一樣，字級和間距�
 
 一條線串起幾個時間點。
 
-<img src="preview/c/timeline.webp" width="511" alt="時間軸">
+<img src="preview/c/timeline.webp" width="513" alt="時間軸">
 
 ```html
 <ol class="timeline">
@@ -286,7 +301,7 @@ A4 講義和 16:9 簡報共用同一組元件，寫法一樣，字級和間距�
 
 方框留給讀者自己勾，`.done` 已經打勾。
 
-<img src="preview/c/checklist.webp" width="263" alt="檢核清單">
+<img src="preview/c/checklist.webp" width="264" alt="檢核清單">
 
 ```html
 <ul class="checklist">
@@ -334,7 +349,7 @@ A4 講義和 16:9 簡報共用同一組元件，寫法一樣，字級和間距�
 
 ### 標籤與難度
 
-<img src="preview/c/tag.webp" width="287" alt="標籤與難度">
+<img src="preview/c/tag.webp" width="289" alt="標籤與難度">
 
 ```html
 <span class="tag">基礎</span> <span class="tag solid">挑戰</span>
@@ -344,7 +359,7 @@ A4 講義和 16:9 簡報共用同一組元件，寫法一樣，字級和間距�
 
 ### 日文讀音
 
-<img src="preview/c/ruby.webp" width="411" alt="日文讀音">
+<img src="preview/c/ruby.webp" width="413" alt="日文讀音">
 
 ```html
 <ruby lang="ja">特徴音<rt>とくちょうおん</rt></ruby>
@@ -378,7 +393,7 @@ A4 講義和 16:9 簡報共用同一組元件，寫法一樣，字級和間距�
 
 選項代號 A B C D 自動編，兩欄排。
 
-<img src="preview/c/choices.webp" width="428" alt="選擇題">
+<img src="preview/c/choices.webp" width="427" alt="選擇題">
 
 ```html
 <ol class="choices">
@@ -429,7 +444,7 @@ A4 講義和 16:9 簡報共用同一組元件，寫法一樣，字級和間距�
 
 編號自動寫成 [1] [2]。
 
-<img src="preview/c/refs.webp" width="414" alt="參考資料">
+<img src="preview/c/refs.webp" width="415" alt="參考資料">
 
 ```html
 <ol class="refs">
@@ -441,7 +456,7 @@ A4 講義和 16:9 簡報共用同一組元件，寫法一樣，字級和間距�
 
 條列、術語、短段落排成兩欄省空間。
 
-<img src="preview/c/flow.webp" width="560" alt="分欄">
+<img src="preview/c/flow.webp" width="561" alt="分欄">
 
 ```html
 <ul class="flow">
@@ -526,7 +541,7 @@ A4 講義和 16:9 簡報共用同一組元件，寫法一樣，字級和間距�
 
 十二個調照五度排一圈，關係小調在內圈，調號在圈外。
 
-<img src="preview/c/fifths.webp" width="293" alt="五度圈">
+<img src="preview/c/fifths.webp" width="292" alt="五度圈">
 
 ```html
 <ol class="fifths">
@@ -592,7 +607,7 @@ A4 講義和 16:9 簡報共用同一組元件，寫法一樣，字級和間距�
 
 ## 頁型
 
-### A4 頁型
+### 紙本頁型
 
 <img src="preview/c/cover-band.webp" width="688" alt="封面：橫幅版">
 
@@ -600,7 +615,9 @@ A4 講義和 16:9 簡報共用同一組元件，寫法一樣，字級和間距�
 
 - **封面**　`.cover`：58mm 圓形頭像、標題置中。`.cover.band`：上面一條橫式主視覺、標題靠左。
 - **章節頁**　`.chapter`：大編號、章名、一句話，不套頁首。加 `.deep` 整頁深色（滿版），`.bubbles` 加泡泡，`.watermark` 換成線稿。
+  **什麼時候用**：十頁以上、或分成好幾章的長文檔，每換一章就插一頁，讓眼睛有地方休息，翻的時候也知道自己走到哪了。三、五頁的短文件不要用，插了反而空。
 - **一般頁**　一個 `<section class="page">` 一頁，頁首（文件標題、頁碼）自動產生，標題寫在 `:root` 的 `--running-title`。
+- **紙張**　預設 A4 直向。橫向、A5、Letter 都只是改 `doc.css` 裡 `--paper` 和 `--page-h` 兩個變數；整份一起換，`@page` 讀不到個別元素的變數。橫向之後一行會變很長，正文調大或分兩欄。
 
 ```html
 <section class="page">
@@ -623,7 +640,7 @@ A4 講義和 16:9 簡報共用同一組元件，寫法一樣，字級和間距�
 - **一般頁**　`.kicker` 章節名、`h2` 標題、`.rule` 短線、`.body` 內容，`.pageno` 留空自動填頁碼。
 - **目錄頁**　`.slide.agenda`：每段一個 `<li>`，`<small>` 補一句，`.now` 標出現在講到哪裡，其他段落自動變淡。
 - **左文右圖**　`.two-col`：文字 52%、圖 48%，垂直置中。
-- **半版圖**　`.slide.split`：第一張 `<img>` 貼齊左邊、上下滿版，文字放右半；`.right` 圖在右。
+- **半版圖**　`.slide.split`：第一張 `<img>` 貼齊左邊、上下滿版，文字放右半；`.right` 圖在右。適合開場（一張大圖先把人拉進來）、換新主題、或講一個動作 —— 文字只放一兩句，圖自己會說話。
 - **章節頁**　`.slide.section`：`.num` 章節號、`h2` 章名、`.lede` 一句話。預設深色、右下角有尾巴；`.light` 淺色，`.bubbles` 加泡泡。
 - **引言頁**　`.slide.quote`：`blockquote` 一句話撐一整頁，出處寫在 `.cite`。
 - **GAL 對話頁**　見上面的 [GAL 對話頁](#gal-對話頁)。
@@ -653,7 +670,7 @@ A4 講義和 16:9 簡報共用同一組元件，寫法一樣，字級和間距�
 <section class="slide end bubbles">
   <h2>今天就到這裡喵</h2>
   <p class="lede">下一回：リディアン（Lydian）</p>
-  <p class="credit">署名</p>
+  <p class="credit">大肥魚（@Kujira-rice）／ Mizimo<br>角色插圖：phoiex/AAAAGENT original-design<br>CC BY-NC-SA 4.0 ｜ 僅供非商業使用</p>
 </section>
 ```
 

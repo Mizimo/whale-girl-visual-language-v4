@@ -20,8 +20,19 @@
   --sign-w: 46mm;  /* 舉牌的寬度 */
 }
 
+/* ── 紙張 ─────────────────────────────── */
+/* 預設 A4 直向。要橫向就把 --paper 改成 `A4 landscape`、--page-h 改成 210mm；
+ * A5 是 `A5` / 210mm，Letter 是 `Letter` / 279mm。--page-h 只管章節頁的高度，
+ * 要跟著紙張走。
+ * 橫向之後內容寬從 182mm 變成 269mm，一行會到五十幾個中文字，太長不好讀——
+ * 正文可以用 --doc-body 調大一點，或把內容分成兩欄。 */
+:root {
+  --paper: A4;
+  --page-h: 297mm;
+}
+
 @page {
-  size: A4;
+  size: var(--paper);
   margin: 13mm 14mm 11mm 14mm;
 }
 
@@ -108,7 +119,10 @@ small { font-size: var(--doc-label); color: var(--c-ink-2); }
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid var(--c-accent-soft);
-  box-shadow: 0 2px 10px color-mix(in srgb, var(--c-primary) 16%, transparent);
+  /* 柔邊一律用 filter: drop-shadow，不要用半透明的 box-shadow（見 BUILD.md 的「陰影」）：
+     Chrome 把半透明 box-shadow 寫成 Luminosity 軟遮罩，macOS Preview 不套用，
+     陰影會整塊變成一個正方形。 */
+  filter: drop-shadow(0 2px 10px color-mix(in srgb, var(--c-primary) 16%, transparent));
 }
 .cover h2 { font-size: var(--doc-display); margin: var(--sp-6) 0 var(--sp-3); }
 .cover.band { text-align: left; margin-top: 0; }
@@ -119,6 +133,7 @@ small { font-size: var(--doc-label); color: var(--c-ink-2); }
   border: 0;
   border-radius: var(--radius-s);
   box-shadow: none;
+  filter: none;
 }
 .cover.band h2 { margin-top: var(--sp-7); }
 /* CC BY-NC-SA 要求署名，用到素材就別拿掉 */
@@ -135,7 +150,7 @@ figcaption { font-size: var(--doc-micro); color: var(--c-ink-3); margin-top: var
 @page chapter { margin: 0; }
 .chapter {
   position: relative;
-  height: 297mm;
+  height: var(--page-h);
   margin-bottom: -1px;  /* 剛好一頁高，扣掉捨入誤差，免得多出一張白紙 */
   padding: 0 26mm 34mm;
   display: flex;

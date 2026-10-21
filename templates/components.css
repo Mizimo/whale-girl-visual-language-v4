@@ -10,7 +10,51 @@
  * 每個元件的寫法和長相見 docs/COMPONENTS.md；實際排出來的樣子在 examples/components*.pdf。
  */
 
-html { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+html {
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+  /* macOS 的 sub-pixel 抗鋸齒會讓同一份字型看起來比 Linux／CI 粗一級。
+   * 關掉之後輸出的字重才跟別的機器對得上。 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+}
+
+/* ── 旁白 ─────────────────────────────── */
+/* 一句感想配一張小臉，像坐在旁邊講。簡報每一頁都可以放一個，放在內容的最後面。
+ * <p class="aside tip">白鍵從 D 開始數，就是多利安喔。</p>
+ * 種類跟講解框一樣：不加是講解，tip／warn／mix／fact／review 換表情。
+ * 只留表情不寫字就留空：<p class="aside tip"></p> */
+.aside {
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  margin: var(--stack) 0 0;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--c-ink-2);
+}
+.aside::before {
+  content: "";
+  flex: none;
+  width: max(40px, var(--av));
+  height: max(40px, var(--av));
+  border-radius: 50%;
+  background: center / cover no-repeat url("../assets/generated-2026-10-14/avatars/whale-serious.png");
+}
+.aside.tip::before { background-image: url("../assets/generated-2026-10-14/avatars/whale-happy.png"); }
+.aside.warn::before { background-image: url("../assets/generated-2026-10-14/avatars/whale-angry.png"); }
+.aside.mix::before { background-image: url("../assets/generated-2026-10-14/avatars/whale-troubled.png"); }
+.aside.fact::before { background-image: url("../assets/generated-2026-10-14/avatars/whale-surprised.png"); }
+.aside.review::before { background-image: url("../assets/generated-2026-10-14/avatars/whale-sleepy.png"); }
+
+/* ── 表情一覽 ─────────────────────────── */
+/* 講解框的頭像在 A4 上只有 34px，六個排在一起看不清表情；要示範表情就用這個排一排。
+ * <div class="faces"><figure><img src="…/whale-happy.png" alt=""><figcaption>開心</figcaption></figure>…</div> */
+.faces { display: flex; flex-wrap: wrap; gap: var(--sp-5); margin: var(--stack) 0 0; }
+.faces figure { margin: 0; text-align: center; }
+.faces img { width: var(--s, 60px); height: var(--s, 60px); border-radius: 50%; display: block; }
+.faces figcaption { font-size: var(--fs-micro); color: var(--c-ink-3); margin-top: .35em; }
 
 /* ── 深海：深色頁 ─────────────────────── */
 /* 把一組淺色 token 換成深色那組，裡面的元件不用改寫就會跟著變。
@@ -419,7 +463,10 @@ td.key:first-child, th.key:first-child { padding-left: calc(var(--pad-x) * .75);
   translate: -50% 0;
   border-radius: 50%;
   background: center / cover no-repeat url("../assets/generated-2026-10-14/avatars/whale-serious.png");
-  box-shadow: 0 0 0 .2em var(--art-paper), 0 .15em .6em color-mix(in srgb, var(--c-deep) 25%, transparent);
+  /* 紙邊是向量（不透明、模糊 0）；底下那層柔邊用 drop-shadow，
+     半透明的 box-shadow 在 macOS Preview 會變成一塊正方形。 */
+  box-shadow: 0 0 0 .2em var(--art-paper);
+  filter: drop-shadow(0 .15em .6em color-mix(in srgb, var(--c-deep) 25%, transparent));
 }
 .sticker.tip::before { background-image: url("../assets/generated-2026-10-14/avatars/whale-happy.png"); }
 .sticker.warn::before { background-image: url("../assets/generated-2026-10-14/avatars/whale-angry.png"); }

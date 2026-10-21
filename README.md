@@ -2,10 +2,13 @@
 
 <img src="assets/deepseek-icon/thumbnails/whale-icon.webp" width="200" alt="大肥魚">
 
-# 大肥魚 ｜ 素材與參考方案庫
+# 大肥魚 ｜ 視覺與語言庫
 
-角色素材、配色方案、字體方案、版面模板、元件，全部收在這裡。<br>
-做 PDF、講義、簡報、筆記的時候從裡面挑，**要挑哪一套、要不要整套照用，每次看情況**。
+**視覺**　素材與參考方案——角色圖、配色、字體、版面模板、四十多種元件、四份可以直接改的成品。是一排抽屜，不是規則手冊。<br>
+**語言**　怎麼講、怎麼針對一個人寫——聲音、人設、寫作習慣、給 agent 的讀者簡報。
+
+做 PDF、講義、簡報、筆記的時候從裡面挑，**要挑哪一套、要不要整套照用，每次看情況**。<br>
+配色和版面都對了，讀起來卻像說明書，那就不是同一份東西。
 
 ![授權](https://img.shields.io/badge/授權-CC%20BY--NC--SA%204.0-6a89d5?style=flat-square)
 ![僅限非商業](https://img.shields.io/badge/僅限-非商業使用-313157?style=flat-square)
@@ -19,15 +22,22 @@
 
 這個庫**不是規則手冊**，是一排抽屜。裡面的東西都經過實測、可以直接拿去用，但沒有哪一條是必須遵守的。
 
+**視覺**　元素、樣板、具體的實現
+
 - **素材**　角色圖、表情、主視覺、小圖案 → [`assets/`](assets/README.md)
 - **配色方案**　目前兩組：從角色量測的靛藍組、原本的深海藍組 → 見下面的「配色」
 - **字體方案**　系統字體（快、不用下載）、Noto Sans TC + JP 靜態字重（跨平台一致、PDF 不嵌 Type 3）→ 見「字體」
 - **版面模板**　A4 講義、16:9 簡報、Markdown 筆記 → [`templates/`](templates/)
 - **元件**　講解框、對話、舉牌、GAL 對話頁、卡片、步驟、時間軸、和弦進行、五度圈……四十多種，每種都附截圖和寫法 → [`docs/COMPONENTS.md`](docs/COMPONENTS.md)
-- **成品**　兩份範例，可以直接改 → [`examples/`](examples/)
+- **成品**　四份範例，可以直接改 → [`examples/`](examples/)（A4 講義、16:9 簡報，各有一份範例和一份元件總覽）
 - **Presets**　五個成品的做法（原稿對照、中文版講義、handoff、中文整理、圖解）→ [`presets/`](presets/README.md)
-- **怎麼用得像同一個人**　語氣、判斷、什麼時候閉嘴 → [`docs/VOICE.md`](docs/VOICE.md)
-- **怎麼寫一份「給 agent 的讀者簡報」**　格式、範例、脫敏原則 → 根目錄的 [`AGENTS.md`](AGENTS.md#附錄怎麼寫一份給-agent-的讀者簡報)
+
+**語言**　怎麼講、怎麼針對一個人寫
+
+- **聲音**　讀者是誰、語氣、判斷、什麼時候閉嘴 → [`docs/VOICE.md`](docs/VOICE.md)
+- **人設**　外型、服裝、配色量測值、不能變的地方 → [`docs/CHARACTER.md`](docs/CHARACTER.md)
+- **寫作習慣**　中英混排、標點、和弦記號 → [`docs/WRITING.md`](docs/WRITING.md)
+- **給 agent 的讀者簡報**　格式、範例、脫敏原則 → 根目錄的 [`AGENTS.md`](AGENTS.md#附錄怎麼寫一份給-agent-的讀者簡報)
 
 ## 本小姐平常怎麼做
 
@@ -79,7 +89,7 @@
 
 ## 字體與字級
 
-- 中文：**Noto Sans TC**。執行一次 `pip install fonttools` 和 `python3 tools/fetch_fonts.py`，會在 `fonts/` 做出 Regular、Bold 兩個靜態字重（不進 git），輸出時優先用它；沒有的話找系統裝的 Noto，再沒有才退到 PingFang TC、微軟正黑體。
+- 中文：**Noto Sans TC**，做成 Regular、Bold 兩個靜態字重放在 `fonts/`（不進 git，跑一次 `tools/fetch_fonts.py` 就有，見[建置](docs/BUILD.md)）。輸出時優先用它；沒有的話找系統裝的 Noto，再沒有才退到 PingFang TC、微軟正黑體。
 - 日文：**Noto Sans JP**，同一支 `fetch_fonts.py` 一起做。補的是 Noto Sans TC 沒有的日文漢字（楽、徴、続、録……）；加了 `lang="ja"` 的段落會改成日文字形優先。
 - 等寬（和弦記號、程式）：`"SF Mono"`, `Menlo`, `Consolas`, `"DejaVu Sans Mono"`，裡面的中文接回 Noto Sans TC。
 - 音樂記號（♭ ♮ ♯）：Noto 的這三個字是全形字寬，和弦記號會排成「B ♭ 7」。`fetch_fonts.py` 會從 Noto Sans TC 抽出這三個字、收緊左右空白，做成 **WG Accidentals**（只改字寬、不改字形），排在字體清單最前面、只管這三個字。沒跑過的話退到 Apple Symbols、Segoe UI Symbol 或 DejaVu Sans，不會被系統換成怪字形。
@@ -97,21 +107,28 @@
 
 ## 版面
 
-三種載體，共用同一組配色、字級和元件。
+三種載體，共用同一組配色、字級和元件。紙張不綁 A4——預設是它，但橫向、A5、Letter 都只是改兩個變數的事。
 
-### A4 文件
+### 紙本文件
 
 <img src="docs/preview/handout.png" width="880" alt="A4 講義範例">
 
 封面是 58mm 圓形頭像加標題，最下面放署名。內頁的頁首自動產生：左邊文件標題、右邊「頁碼 / 總頁數」，下面一條 2px 主色線，內容溢到下一頁也會有。文件標題寫在 HTML 開頭：`:root { --running-title: "課程名 ｜ 第 6 回"; }`，封面不放頁首。頁面 A4、邊距 13～14mm。以前手寫在 section 裡的 `.head` 照樣能用。
 
-骨架在 [`templates/doc-template.html`](templates/doc-template.html)，版式在 [`templates/doc.css`](templates/doc.css)：
+文件長到十頁以上、或分成好幾章的時候，每章開頭插一頁**章節頁**（`.chapter`）：大編號、章名、一句話，右下角一條尾巴，加 `.watermark` 換成線稿、加 `.deep` 整頁深色。它不套頁首，翻起來知道自己在哪。短文件不要插，會空。看長相：[A4 元件總覽](examples/components.pdf) 最後兩頁。
 
-```bash
-python3 templates/build_pdf.py 你的檔案.html 輸出.pdf
+紙張預設 **A4 直向**。要橫向就在 [`templates/doc.css`](templates/doc.css) 的 `:root` 改兩行：
+
+```css
+--paper: A4 landscape;
+--page-h: 210mm;
 ```
 
-需要 Chrome 131 以後的版本，Chromium、Edge 也可以。macOS、Linux、Windows 都會自動找，找不到就用 `--chrome 路徑` 指定。輸出後會檢查兩件事：PDF 頁數比 section 多，代表有一頁塞不下，直接失敗；有 Type 3 字型就提醒你先抓字體。
+A5 是 `A5` / `210mm`，Letter 是 `Letter` / `279mm`。整份一起換——`@page` 讀不到個別元素的變數，所以沒辦法只讓某幾頁橫向。
+
+橫向之後內容寬從 182mm 變成 269mm，一行會到五十幾個中文字，太長不好讀：正文用 `--doc-body` 調大一點，或把內容分兩欄。
+
+骨架在 [`templates/doc-template.html`](templates/doc-template.html)，版式在 [`templates/doc.css`](templates/doc.css)。怎麼輸出、踩過什麼坑 → [`docs/BUILD.md`](docs/BUILD.md)。
 
 ### 16:9 簡報
 
@@ -124,7 +141,7 @@ python3 templates/build_pdf.py 你的檔案.html 輸出.pdf
 - 換章節時插一頁章節頁（`.slide.section`，預設深色）；一句話撐一整頁用引言頁（`.slide.quote`）。任何一頁加 `.deep` 都能換成深色。
 - 另外還有目錄頁、半版圖、GAL 對話頁、收尾頁，長相和寫法見 [docs/COMPONENTS.md 的「簡報頁型」](docs/COMPONENTS.md#簡報頁型)。
 
-版式在 [`templates/deck.css`](templates/deck.css)，起點是 [`templates/deck-template.html`](templates/deck-template.html)。輸出指令跟 A4 一樣。
+版式在 [`templates/deck.css`](templates/deck.css)，起點是 [`templates/deck-template.html`](templates/deck-template.html)。怎麼輸出 → [`docs/BUILD.md`](docs/BUILD.md)。
 
 ### Markdown 筆記
 
@@ -144,7 +161,7 @@ A4 和簡報共用同一組元件（[`templates/components.css`](templates/compo
 
 <img src="docs/preview/components.png" width="880" alt="A4 元件總覽">
 
-- **角色**　講解框（六種表情）、對話泡泡、貼圖、印章、舉牌、GAL 對話頁
+- **角色**　講解框（六種表情）、對話泡泡、貼圖、旁白、印章、舉牌、GAL 對話頁
 - **重點與比較**　例子框、重點框、標籤框、對錯對照、公式、大數字、卡片、兩欄對照、表格
 - **流程與結構**　步驟、時間軸、檢核清單、目錄、連載進度
 - **教材**　練習題、選擇題（學生版一個 class 就把答案藏起來）、姓名欄、術語表、對照翻譯、參考資料、分欄、日文讀音
@@ -180,16 +197,16 @@ A4 和簡報共用同一組元件（[`templates/components.css`](templates/compo
 
 - [A4 講義範例](examples/handout.pdf)（3 頁）　封面、配色頁、元件頁，對應 `templates/doc.css`
 - [16:9 簡報範例](examples/deck.pdf)（6 頁）　封面、原則兩頁、版面、選圖、收尾，對應 `templates/deck.css`
-- [A4 元件總覽](examples/components.pdf)（13 頁）　每個元件各放一個實際的樣子，最後兩頁是章節頁
+- [A4 元件總覽](examples/components.pdf)（14 頁）　每個元件各放一個實際的樣子，最後兩頁是章節頁
 - [簡報元件總覽](examples/components-deck.pdf)（23 頁）　每種頁型和元件各一頁，含 GAL 對話頁、目錄頁、半版圖、收尾頁
 
 HTML 都可以直接改內容再重新輸出，改配色只要動 `templates/tokens.css`。全部重建一次：`python3 tools/build.py`（token 檢查、輸出四份 PDF、更新預覽圖和元件截圖、核對校驗清單）。
 
-## 這個 repo 裡有什麼
+## 檔案放哪裡
 
 - **[`AGENTS.md`](AGENTS.md)**　接手的第一份。這個 repo 是什麼、三件比素材重要的事、以及「怎麼寫一份給 agent 的讀者簡報」
 - **`assets/`**　素材本體與來源標註 → [assets/README.md](assets/README.md)
-- **`docs/`**　[聲音](docs/VOICE.md)、[配色方案](docs/PALETTES.md)、[元件](docs/COMPONENTS.md)、[寫作習慣](docs/WRITING.md)、[人設](docs/CHARACTER.md)、[素材來源與授權](docs/SOURCES.md)、[許願清單](docs/ART-REQUEST.md)、配色 SVG、預覽圖
+- **`docs/`**　[建置與輸出](docs/BUILD.md)、[聲音](docs/VOICE.md)、[配色方案](docs/PALETTES.md)、[元件](docs/COMPONENTS.md)、[寫作習慣](docs/WRITING.md)、[人設](docs/CHARACTER.md)、[素材來源與授權](docs/SOURCES.md)、[許願清單](docs/ART-REQUEST.md)、配色 SVG、預覽圖
 - **`templates/`**　`tokens.css`（顏色、字體、字級）、`components.css`（共用元件）、`doc.css`（A4）、`deck.css`（16:9）、`markdown.css`（VS Code 筆記預覽）、三份模板、`build_pdf.py`
 - **`tools/`**　`build.py`（一次重建全部）、`tokens.py`（色表、字級表、對比檢查）、`derive.py`（縮圖、頭像、反白圖示、輕量版）、`previews.py`（README 預覽圖）、`shots.py`（COMPONENTS.md 的元件截圖）、`checksums.py`（校驗清單）、`fetch_fonts.py`（下載字體）
 - **`examples/`**　上面那四份成品
@@ -202,8 +219,9 @@ HTML 都可以直接改內容再重新輸出，改配色只要動 `templates/tok
 
 ## 署名與授權
 
-用到素材的產出物上要放這段小字（`--doc-micro`、`--c-ink-3`）：
+用到素材的產出物上要放這段小字（`--doc-micro`、`--c-ink-3`）。**第一行是自己的名字，再來才是素材來源**：
 
+> 大肥魚（@Kujira-rice）／ Mizimo
 > 角色插圖：phoiex/AAAAGENT 的 original-design 素材（AI 輔助製作）
 > 原始設計參考 fornarwhal/deepseek-whale-girl-icon ｜ CC BY-NC-SA 4.0 ｜ 僅供非商業使用
 
