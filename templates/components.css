@@ -311,7 +311,12 @@ td.key:first-child, th.key:first-child { padding-left: calc(var(--pad-x) * .75);
   --n: 2;
   height: calc(var(--n) * 2em);
   margin-top: var(--sp-2);
-  background: repeating-linear-gradient(to bottom, transparent 0 calc(2em - 1px), var(--c-line-strong) calc(2em - 1px) 2em);
+  /* 用 linear-gradient ＋ repeat-y，不用 repeating-linear-gradient：
+   * Chrome 列印成 PDF 時，頁面上第一個 repeating-linear-gradient 不會被畫出來（實測 Chrome 155），
+   * 練習題、反應紙的第一個書寫區會整塊空白。 */
+  background-image: linear-gradient(to bottom, transparent 0 calc(2em - 1px), var(--c-line-strong) calc(2em - 1px) 2em);
+  background-size: 100% 2em;
+  background-repeat: repeat-y;
 }
 
 /* ── 兩欄對照 ───────────────────────── */

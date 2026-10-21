@@ -11,6 +11,8 @@
 
 ## 成品長相
 
+<img src="preview.png" width="688" alt="slide-companion 的成品示意">
+
 A4 **橫式**。四種頁：
 
 **一、封面**

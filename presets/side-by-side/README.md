@@ -10,6 +10,8 @@
 
 ## 成品長相
 
+<img src="preview.png" width="688" alt="side-by-side 的成品示意">
+
 **短的：兩欄對照**（一頁以內）
 
 ```

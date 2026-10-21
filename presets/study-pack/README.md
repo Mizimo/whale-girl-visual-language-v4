@@ -10,6 +10,8 @@
 
 ## 成品長相
 
+<img src="preview.png" width="688" alt="study-pack 的成品示意">
+
 四個 markdown，檔名固定：
 
 | 檔名 | 內容 | 長度 |

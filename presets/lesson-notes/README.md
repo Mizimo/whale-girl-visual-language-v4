@@ -10,6 +10,8 @@
 
 ## 成品長相
 
+<img src="preview.png" width="688" alt="lesson-notes 的成品示意">
+
 A4 直向。三種頁：
 
 **一、封面**

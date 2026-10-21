@@ -10,6 +10,8 @@
 
 ## 成品長相
 
+<img src="preview.png" width="688" alt="cheat-sheet 的成品示意">
+
 一到兩頁，表格為主：
 
 ```

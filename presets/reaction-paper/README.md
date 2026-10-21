@@ -10,6 +10,8 @@
 
 ## 成品長相
 
+<img src="preview.png" width="688" alt="reaction-paper 的成品示意">
+
 A4 直向，**一頁**：
 
 ```
