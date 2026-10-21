@@ -24,7 +24,7 @@
 接著讀 [docs/VOICE.md](docs/VOICE.md)：讀者是誰、怎麼講話、什麼時候閉嘴，還有一個真實的反面例子。
 
 要動手做東西之前，先看 [`presets/`](presets/README.md)：那裡放的是**做法**——
-原稿怎麼對照、MAX 的 patch 怎麼交接、一門課怎麼拆成四件。挑一個長得像的再開始。
+原稿怎麼對照、patch 怎麼交接、聲音怎麼畫成格子。挑一個長得像的再開始。
 
 ## 這裡有什麼
 
@@ -34,7 +34,7 @@
 - **版面模板**　A4 講義、16:9 簡報、Markdown 筆記 → [`templates/`](templates/)
 - **元件**　講解框、對話、舉牌、GAL 對話頁、卡片、步驟、時間軸、和弦進行、五度圈……四十多種，每種都附截圖和寫法 → [`docs/COMPONENTS.md`](docs/COMPONENTS.md)
 - **成品**　兩份範例，可以直接改 → [`examples/`](examples/)
-- **Presets**　五個成品的做法：原稿對照、一套四件、handoff 骨架圖、教材講解、圖解講義 → [`presets/`](presets/README.md)
+- **Presets**　五個成品的做法：原稿對照（橫）、中文版講義（直）、handoff、中文整理、圖解 → [`presets/`](presets/README.md)
 - **人設**　外型、服裝、配色量測值、不能變的地方 → [`docs/CHARACTER.md`](docs/CHARACTER.md)
 
 完整的導覽（含配色表與字級表）在 [README.md](README.md)。
