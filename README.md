@@ -30,6 +30,7 @@
 - **版面模板**　A4 講義、16:9 簡報、Markdown 筆記 → [`templates/`](templates/)
 - **元件**　講解框、對話、舉牌、GAL 對話頁、卡片、步驟、時間軸、和弦進行、五度圈……四十多種，每種都附截圖和寫法 → [`docs/COMPONENTS.md`](docs/COMPONENTS.md)
 - **成品**　四份範例，可以直接改 → [`examples/`](examples/)（A4 講義、16:9 簡報，各有一份範例和一份元件總覽）
+- **Presets**　五個成品的做法（原稿對照、中文版講義、handoff、中文整理、圖解）→ [`presets/`](presets/README.md)
 
 **語言**　怎麼講、怎麼針對一個人寫
 
